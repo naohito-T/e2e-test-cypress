@@ -48,6 +48,68 @@ $ yarn cy:open
 >テストコードの拡張子は .js になっていますが .ts として扱えるようにします。
 >e2e ディレクトリに移動します。integration/examples ディレクトリは削除し、package.json を作成します。
 
+```sh
+cypressディレクトリに移動する。
+$ pwd
+/Users/tanakanaohitoshi/work/product/e2e-test-cypress/e2e-test-cypress/cypress
+
+package.jsonを作成する。
+$ npm init -y
+
+$ yarn add typescript
+
+$ yarn add -D cypress @testing-library/cypress eslint-plugin-cypress eslint @typescript-eslint/eslint-plugin
+@typescript-eslint/parser prettier eslint-config-prettier eslint-plugin-prettier
+```
+
+- eslintを効かせる
+
+```sh
+$ touch .eslintrc.js
+```
+
+作成する
+
+```js
+module.exports = {
+  extends: [
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+    'plugin:cypress/recommended',
+    'prettier',
+  ],
+  plugins: ['@typescript-eslint', 'prettier', 'cypress'],
+  root: true,
+};
+```
+
+- cypress配下のjsファイルをtsに全て変更する。
+
+とりあえずintegration内の2つのディレクトリ内のjsをtsに変更してみた。
+→これは失敗。そしてsampleファイルは長いため削除する。
+
+sample.spec.tsを作成してそれだけを実行する。
+```ts
+describe('Check text', () => {
+  it('check text', () => {
+    cy.visit('http://localhost:3000');
+
+    // code タグ内にテキストが存在することを確認する
+    cy.contains('code', 'src/App.tsx');
+  });
+});
+```
+
+```sh
+$ yarn start
+$ yarn cy:run
+```
+
+成功した。
+
+
+
 ## 参考
 
 [参考URL](https://www.gixo.jp/blog/16086/)
