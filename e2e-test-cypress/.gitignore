@@ -24,3 +24,6 @@ yarn-error.log*
 
 # node
 node_modules
+
+# cypress
+e2e/coverage
