@@ -182,6 +182,7 @@ rootディレクトリのpackage.jsonに追記
 }
 ```
 
+e2e/plugins/intex.ts を下記のように変更します。
 
 
 ## 参考
