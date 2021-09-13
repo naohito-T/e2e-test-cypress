@@ -2,7 +2,7 @@
 
 E2E-test-cypress
 
-## start
+## cypress start
 
 `$ yarn start`
 `$ yarn cy:open`
@@ -12,9 +12,17 @@ E2E-test-cypress
 REACT
 TypeScript
 
-## enviroment
+## project enviroment
 
 ```sh
 $ node -v
 v12.21.0
 ```
+
+## docs enviroment
+
+```sh
+$ node -v
+v14.4.0
+```
+
