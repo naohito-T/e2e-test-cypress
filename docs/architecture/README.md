@@ -165,6 +165,25 @@ rootディレクトリのpackage.jsonを変更
 実行できた。スナップショットが作成された。
 次は色を変える。
 
+色を変えてスナップショットを取るとpassされない。
+差分のdiffがスナップショット取られる
+
+- テストカバレッジを取得する
+
+rootディレクトリにてライブラリを追加する
+`$ yarn add -D nyc @cypress/code-coverage`
+
+rootディレクトリのpackage.jsonに追記
+
+```json
+"nyc": {
+  "report-dir": "e2e/coverage",
+  "reporter": [ "text", "lcov" ]
+}
+```
+
+
+
 ## 参考
 
 [参考URL](https://www.gixo.jp/blog/16086/)
