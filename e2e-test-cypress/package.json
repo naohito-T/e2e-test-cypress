@@ -18,8 +18,10 @@
   },
   "scripts": {
     "start": "react-scripts -r @cypress/instrument-cra start",
-    "cy:open": "cross-env NODE_PATH=src cypress open",
-    "cy:run": "cross-env NODE_PATH=src cypress run --headless",
+    "cy:open": "cross-env NODE_PATH=src cypress open --env failOnSnapshotDiff=false",
+    "cy:run": "cross-env NODE_PATH=src cypress run --headless --env failOnSnapshotDiff=false",
+    "cy:snap": "cross-env NODE_PATH=src cypress run --headless",
+    "cy:snap:update": "cross-env NODE_PATH=src cypress run --headless --env updateSnapshots=true",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -4,5 +4,8 @@ describe('Check text', () => {
 
     // code タグ内にテキストが存在することを確認する
     cy.contains('code', 'src/App.tsx');
+
+    // スナップショットテスト
+    cy.matchImageSnapshot('test');
   });
 });
