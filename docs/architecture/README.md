@@ -108,6 +108,80 @@ $ yarn cy:run
 
 成功した。
 
+- スナップショットを導入する
+
+>UI が変わらないことを確かめる際は、スナップショットテストを導入すると良いでしょう。e2e 配下で、必要なライブラリをインストールします。
+
+cypress配下で以下をinstallする
+
+`$ cd e2e-test-cypress/cypress`
+
+`$ yarn add -D @types/cypress-image-snapshot cypress-image-snapshot`
+
+e2e/plugin/index.ts を下記のように変更する。
+
+```ts
+import { addMatchImageSnapshotPlugin } from 'cypress-image-snapshot/plugin';
+
+// const snap = (on: Cypress.PluginEvents,
+//               config: Cypress.PluginConfigOptions): Cypress.PluginConfigOptions => {
+
+// }
+
+/**
+ * @type {Cypress.PluginConfig}
+ */
+export default function (
+  on: Cypress.PluginEvents,
+  config: Cypress.PluginConfigOptions
+): Cypress.PluginConfigOptions {
+  addMatchImageSnapshotPlugin(on, config);
+
+  return config;
+}
+```
+
+Cypressが名前空間が見つかれないと言われている。
+
+
+e2e/support/commands.ts を下記のように変更する。
+
+```ts
+import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
+
+addMatchImageSnapshotCommand();
+```
+
+rootディレクトリのpackage.jsonを変更
+
+```json
+ "start": "react-scripts -r @cypress/instrument-cra start",
+  "cy:open": "cross-env NODE_PATH=src cypress open --env failOnSnapshotDiff=false",
+  "cy:run": "cross-env NODE_PATH=src cypress run --headless --env failOnSnapshotDiff=false",
+  "cy:snap": "cross-env NODE_PATH=src cypress run --headless",
+  "cy:snap:update": "cross-env NODE_PATH=src cypress run --headless --env updateSnapshots=true"
+```
+
+実行できた。スナップショットが作成された。
+次は色を変える。
+
+色を変えてスナップショットを取るとpassされない。
+差分のdiffがスナップショット取られる
+
+- テストカバレッジを取得する
+
+rootディレクトリにてライブラリを追加する
+`$ yarn add -D nyc @cypress/code-coverage`
+
+rootディレクトリのpackage.jsonに追記
+
+```json
+"nyc": {
+  "report-dir": "e2e/coverage",
+  "reporter": [ "text", "lcov" ]
+}
+```
+
 
 
 ## 参考
