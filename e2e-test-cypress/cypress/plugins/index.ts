@@ -5,7 +5,6 @@ import { addMatchImageSnapshotPlugin } from 'cypress-image-snapshot/plugin';
 //               config: Cypress.PluginConfigOptions): Cypress.PluginConfigOptions => {
 
 // }
-
 /**
  * @type {Cypress.PluginConfig}
  */
